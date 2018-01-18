@@ -4,7 +4,6 @@ export class RoomList extends Component {
   constructor(props) {
     super(props);
       this.state = {name: "", rooms: []};
-
       this.roomsRef = this.props.firebase.database().ref('rooms');
       this.handleChange = this.handleChange.bind(this);
       this.createRoom = this.createRoom.bind(this);
@@ -28,6 +27,10 @@ export class RoomList extends Component {
     });
   }
 
+  selectRoom(room) {
+     this.props.activeRoom(room);
+  }
+
   render() {
     const roomForm = (
       <form onSubmit={this.createRoom}>
@@ -37,7 +40,7 @@ export class RoomList extends Component {
     );
 
     const roomList = this.state.rooms.map((room) =>
-      <li key={room.key}>{room.name}</li>
+      <li key={room.key} onClick={(e) => this.selectRoom(room, e)}>{room.name}</li>
     );
 
     return(
