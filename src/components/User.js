@@ -11,12 +11,14 @@ signIn() {
   const provider = new this.props.firebase.auth.GoogleAuthProvider();
   this.props.firebase.auth().signInWithPopup(provider).then((result) => {
     const user = result.user;
+    console.log(user);
     this.props.setUser(user);
   });
 }
 
 signOut() {
   this.props.firebase.auth().signOut().then(() => {
+    console.log("hello");
     this.props.setUser(null);
   });
 }
